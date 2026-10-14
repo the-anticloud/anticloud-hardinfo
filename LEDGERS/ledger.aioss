@@ -1,0 +1,9 @@
+# AIOSS ledger v1
+# project: LAPTOPS/HARDINFO
+# records: 5
+# head: 66844df7b103cd2dce42efc0cd62e9b51a0bbe3ab0e499bd2ee14543aca47af3
+{"digest": "ca20565a3a034726b81d5dd818d5c3fac0c81b57e3cb6cb142e63dbfdfc7ee5a", "kind": "bench-report", "path": "BENCH.json", "payload_sha3": "3e0dc4e34b5e27f58be97622df0ae709f5f7a3db74f08d0c2fa893049e0c7ab9", "prev": "5a5a9db5fb708ae61804306200e7a9e31853dde596c5f14d2303d4349fe14b2d", "seq": 0, "ts": "2026-10-09T05:53:11Z"}
+{"digest": "ee3983acb375ac0cc9b68a76a0f3a2f198e5a4b193bcc39cd846e6bcdf3d031c", "kind": "result-register", "path": "ISOLATED_LAB_RESULTS/03_Result_Register.md", "payload_sha3": "e851305cfc03b63fb6279b3a6bdaeeb760e8a820cb42137a6f0cbacb2f4827b4", "prev": "ca20565a3a034726b81d5dd818d5c3fac0c81b57e3cb6cb142e63dbfdfc7ee5a", "seq": 1, "ts": "2026-10-09T05:53:11Z"}
+{"digest": "43083f44d8589d609e56cd030316ba90579c4bf5c947db4898991d224153f254", "kind": "readme", "path": "README.md", "payload_sha3": "8f523ee1579e2c9630fd88882e53eeb4065e4902b5e13550c25a7e20750b1914", "prev": "ee3983acb375ac0cc9b68a76a0f3a2f198e5a4b193bcc39cd846e6bcdf3d031c", "seq": 2, "ts": "2026-10-09T05:53:11Z"}
+{"digest": "a954f71552feffbbd888d16cd397537b8c0c2b51d0c2719b0ee606421f6aa53c", "kind": "licence", "path": "ANTICOMMONS_LICENSE.md", "payload_sha3": "c71b3aa7bd863d3eac125c631668c9d41409f046d4983c4d6edf2f5e1e1548ac", "prev": "43083f44d8589d609e56cd030316ba90579c4bf5c947db4898991d224153f254", "seq": 3, "ts": "2026-10-09T05:53:11Z"}
+{"digest": "66844df7b103cd2dce42efc0cd62e9b51a0bbe3ab0e499bd2ee14543aca47af3", "kind": "notice", "path": "NOTICE", "payload_sha3": "fb4ce97b39b4e4a495ddec470dced7633b8c37124af7125ae207f4cee63f7a24", "prev": "a954f71552feffbbd888d16cd397537b8c0c2b51d0c2719b0ee606421f6aa53c", "seq": 4, "ts": "2026-10-09T05:53:11Z"}
