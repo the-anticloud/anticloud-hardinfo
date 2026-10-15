@@ -1,247 +1,105 @@
 # HARDINFO
 
-**Category:** LAPTOPS
-**Status:** Active development with Anticloud overlay
+> Anticloud offline package — upstream: lpereira/hardinfo @ `master`.
 
 ## What This Project Does
 
-HARDINFO is an open-source project in the LAPTOPS category.
+System profiler and benchmark tool for Linux systems
 
-This project provides tools, libraries, and functionality for developers
-and end users working in the LAPTOPS domain. It is part of the
-Anticloud ecosystem, which adds measured performance improvements,
-security hardening, and comprehensive documentation to upstream
-open-source projects.
+**Topics:** c, linux, profiler, system-information
 
-The project addresses key challenges in LAPTOPS by providing:
+## Upstream README
 
-- A well-tested, community-driven codebase
-- Standard interfaces compatible with the broader ecosystem
-- Documentation and examples for common use cases
-- Integration points for the Anticloud overlay improvements
+> [!WARNING]
+>
+> This repository is being *decomissioned* and will remain as a personal archive of HardInfo source code.  The development continues in the [@hardinfo2/hardinfo2](https://github.com/hardinfo2/hardinfo2) repository.  This branch will soon become a mirror of the ``main`` branch from the ``hardinfo2`` repository.
 
-## Installation
 
-### Prerequisites
+HARDINFO
+========
 
-Before installing HARDINFO, ensure you have the following:
+HardInfo is a system profiler and benchmark for Linux systems. It is able to
+obtain information from both hardware and basic software, and organize it
+in a simple to use GUI.
 
-- A compatible operating system (Linux, macOS, or Windows)
-- Required build tools as specified by the upstream project
-- Runtime dependencies per the upstream requirements
+Features include:
+- Report generation (in either HTML or plain text)
+- Benchmark result synchronization
+- Ability to explore the information on remote computers
 
-### From Source
+Status
+------
 
-To build from source, clone the repository and follow the
-upstream build instructions:
+Capabilities: HardInfo currently detects most software and hardware detected by the OS.
+Features: The remote sync was disabled due to server loss.
+Development: Currently done by contributors, a new dedicated maintainer is needed.
 
-```bash
-git clone https://github.com/lpereira/hardinfo/hardinfo.git
-cd hardinfo
-make
-sudo make install
+Server code can be found in the "server" branch: https://github.com/lpereira/hardinfo/tree/server
+
+DEPENDENCIES
+------------
+
+Required:
+- GTK+ 2.10 (or newer)
+- GLib 2.10 (or newer)
+- Zlib (for zlib benchmark)
+
+Optional (for synchronization/remote):
+- Libsoup 2.24 (or newer)
+
+BUILDING
+--------
+
+Create a build directory and build from there:
+
+``` bash
+	hardinfo $ mkdir build
+	hardinfo $ cd build
+	build $ cmake ..
+	build $ make
 ```
 
-### Package Managers
+There are some variables that can be changed:
 
-Depending on your platform, HARDINFO may be available
-through package managers such as apt, brew, or pip. Refer to
-the upstream documentation for platform-specific instructions.
+ * `CMAKE_BUILD_TYPE`: Can either be ``Release`` or ``Debug``.
+   * `[Default: Release]` ``Debug`` prints messages to console and is not recommended for general use.
+ * `CMAKE_INSTALL_PREFIX`: Sets the installation prefix.
+   * `[Default: /usr/local]`: Distributions usually change this to `/usr`.
+ * `HARDINFO_NOSYNC`: Disables network synchronization.
+   * `[Default: 1]`: Disabled by default due to the server being lost.
 
-## Usage
+To set a variable, use cmake's -D parameter. For example:
 
-### Basic Usage
+`	build $ cmake .. -DCMAKE_BUILD_TYPE=Debug `
 
-After installation, HARDINFO can be invoked as follows:
+Network sync is enabled if libsoup is detected. If having trouble building with libsoup, disable it with:
 
-```bash
-hardinfo --help
-hardinfo
-```
+`	build $ cmake -DHARDINFO_NOSYNC=1`
 
-### Common Operations
+SETTING UP
+----------
 
-1. **Initialization** - Set up the project environment and configuration
-2. **Execution** - Run the main functionality with appropriate parameters
-3. **Monitoring** - Check status and output during operation
-4. **Shutdown** - Cleanly terminate and save state
+Most hardware is detected automatically by HardInfo, however, some hardware 
+needs manual set up. They are:
 
-### Examples
+### Sensors
 
-```bash
-hardinfo --input /path/to/input --output /path/to/output
-hardinfo --config /path/to/config.yaml
-hardinfo --verbose --log-level debug
-```
+**lm-sensors**: If your computer is compatible with lm-sensors module, use by example the
+`sensors-detect` program included with the lm-sensors package of Debian based distros, and be sure
+to have the detected kernel modules loaded.
 
-## API
+**hddtemp**: To obtain the hard disk drive temperature, be sure to run hddtemp
+in daemon mode, using the default port.
 
-### Overview
+### Memory Speed
 
-HARDINFO exposes a standard API consistent with its category.
-The API can be accessed programmatically or through the command
-line interface.
-
-### Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /status | Get current status |
-| POST | /execute | Execute main operation |
-| GET | /results | Retrieve results |
-| DELETE | /reset | Reset to initial state |
-
-### Authentication
-
-API authentication is handled through standard mechanisms.
-Refer to the upstream documentation for specific authentication
-requirements and token management.
-
-### Rate Limiting
-
-The API implements rate limiting to prevent abuse. Default limits
-are configurable through the configuration file.
-
-## Dependencies
-
-### Build Dependencies
-
-- Compiler (GCC, Clang, or MSVC)
-- Build system (Make, CMake, or Meson)
-- Package manager (pip, npm, or cargo)
-
-### Runtime Dependencies
-
-Runtime dependencies are managed by the upstream project build
-system. Key dependencies include:
-
-- Standard library components
-- Third-party libraries as specified in upstream documentation
-- System libraries required for operation
-
-### Optional Dependencies
-
-Some features may require additional optional dependencies.
-These are documented in the upstream README and can be
-installed separately as needed.
-
-## Configuration
-
-### Configuration File
-
-HARDINFO uses a configuration file for runtime settings.
-The default location is typically:
-
-- **Linux/macOS:** ~/.config/hardinfo/config.yaml
-- **Windows:** %APPDATA%\hardinfo\config.yaml
-
-### Configuration Options
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| log_level | string | info | Logging verbosity |
-| output_dir | string | ./output | Output directory |
-| max_workers | int | 4 | Maximum worker threads |
-| timeout | int | 30 | Operation timeout (seconds) |
-
-### Environment Variables
-
-The following environment variables can override configuration:
-
-- **HARDINFO_LOG_LEVEL** - Override log level
-- **HARDINFO_CONFIG** - Path to custom config file
-- **HARDINFO_OUTPUT** - Override output directory
-
-## Contributing
-
-Contributions to HARDINFO are welcome. Please follow
-these guidelines:
-
-1. **Fork the repository** and create a feature branch
-2. **Make your changes** with clear commit messages
-3. **Add tests** for new functionality
-4. **Update documentation** as needed
-5. **Submit a pull request** with a clear description
-
-### Code Style
-
-Follow the code style established in the upstream project.
-Use consistent formatting, meaningful variable names, and
-clear comments for complex logic.
-
-### Reporting Issues
-
-When reporting issues, please include:
-
-- Operating system and version
-- Project version or commit hash
-- Steps to reproduce the issue
-- Expected vs actual behavior
-- Relevant log output
+The module `eeprom` must be loaded to display info about your currently installed memory.
+Load with `modprobe eeprom` and refresh the module screen.
 
 ## License
 
-**Overlay license:** Anticommons 0.1.0
-**Upstream license:** MIT
+Upstream terms preserved in `THIRD_PARTY_LICENSES/`. Overlay licensed under Anticommons 0.1.0.
 
-This project is distributed under the MIT license.
-The Anticloud overlay is licensed under Anticommons 0.1.0,
-which ensures that improvements remain available to the
-community while preventing enclosure by any single entity.
+## Verification
 
-## Upstream
-
-**SHA-256:** `e5f773d702a49c32daa6818390eb7a559150511b`
-
-The upstream project is pinned to the above commit hash
-to ensure reproducible builds and verifiable provenance.
-
-## Benchmarks
-
-Benchmark results are recorded in BENCH.json.
-
-Measurements were taken on the upstream codebase with the
-Anticloud overlay applied. Key metrics include:
-
-- **Build time** - Time to compile from source
-- **Binary size** - Compiled artifact size
-- **Runtime performance** - Execution speed benchmarks
-- **Memory usage** - Peak and average memory consumption
-- **Test coverage** - Percentage of code covered by tests
-
-All measurements are reproducible and verified against the
-pinned upstream commit.
-
-## Additional Information
-
-This project is part of the Anticloud ecosystem, providing
-LAPTOPS functionality with measured performance characteristics.
-
-The overlay adds 12 improvements including performance
-optimizations, security hardening, documentation generation,
-benchmark measurement, license compliance, dependency auditing,
-SBOM generation, seal verification, quality gates, contamination
-detection, press distribution, and family background integration.
-
-## Archives and Permanent Records
-
-| Platform | Identifier | Volume |
-|---|---|---|
-| Harvard Dataverse | DOI 10.7910/DVN/YMJKOG | 145 citable datasets |
-| AIOSS verification kit | DOI 10.7910/DVN/OORKNJ | Offline hash verification |
-| Zenodo (CERN) | — | 146 records, DOI-registered |
-| OSF | — | 144 preregistered records |
-| Figshare | author 20849885 | Research data and figures |
-| Internet Archive | aioss-format, Anticode | Permanent binary specification |
-| ORCID | 0009-0009-2233-6107 | Permanent researcher ID |
-| Kaggle | pax-millennium-20 | Reproducible T4 benchmark run |
-
-
-
-## Press and Independent Publication
-
-The PAX benchmark release was distributed by Newsfile wire to 336 outlets
-(312 Web, 23 Terminal, 1 Application), including Yahoo Finance, The Globe and Mail, Business Insider, National Post, Financial Post, StreetInsider, Digital Journal, Barchart, International Business Times, and fox47 · National Law Review.
-Wire distribution makes the announcement dated, public, and indexed, which
-makes the claim checkable.
-
+Recompute the SHA3-256 of `BENCH.json` and compare to this package’s register. Any drift = invalid package.
